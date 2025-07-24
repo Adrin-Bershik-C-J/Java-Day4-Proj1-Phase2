@@ -1,0 +1,182 @@
+Repository Link: https://github.com/Adrin-Bershik-C-J/Java-Day4-Proj1-Phase2
+
+Directory structure:
+└── adrin-bershik-c-j-java-day4-proj1-phase2/
+    ├── day4proj1phase2.txt
+    ├── pom.xml
+    └── src/
+        ├── main/
+        │   └── java/
+        │       ├── com/
+        │       │   └── day4proj1phase2/
+        │       │       └── App.java
+        │       ├── exceptions/
+        │       │   └── InvalidAgeException.java
+        │       ├── main/
+        │       │   └── Main.java
+        │       ├── models/
+        │       │   └── User.java
+        │       └── services/
+        │           └── UserService.java
+        └── test/
+            └── java/
+                └── com/
+                    └── day4proj1phase2/
+                        └── AppTest.java
+
+
+User.java:
+package models;
+
+public class User {
+
+    private String userName;
+    private int age;
+
+    public User(String userName, int age) {
+        this.userName = userName;
+        this.age = age;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+}
+
+InvalidAgeException.java:
+package exceptions;
+
+public class InvalidAgeException extends Exception {
+
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+UserService.java:
+package services;
+
+import exceptions.InvalidAgeException;
+import models.User;
+
+public class UserService {
+    public void registerUser(User user) throws InvalidAgeException {
+
+        if(user.getAge()<18){
+            throw new InvalidAgeException("User should be 18 or above to register");
+        }
+
+        System.out.println("User "+user.getUserName()+" regsitered successfully");
+    }
+}
+
+Main.java:
+package main;
+
+import java.util.Scanner;
+
+import exceptions.InvalidAgeException;
+import models.User;
+import services.UserService;
+
+public class Main {
+    public static void main(String[] args) {
+
+        UserService obj = new UserService();
+        Scanner sc = new Scanner(System.in);
+        // User user = new User("Adrin", 21);
+        // User user2 = new User("Bershik", 10);
+        int flag = 1;
+        do {
+            String userName;
+            int age;
+            System.out.println("Enter your name:");
+            userName = sc.nextLine();
+            System.out.println("Enter your age:");
+            age = sc.nextInt();
+            if (userName.equalsIgnoreCase("exit")) {
+                flag = 0;
+            } else {
+                User user = new User(userName, age);
+                try {
+                    obj.registerUser(user);
+                } catch (InvalidAgeException e) {
+                    System.out.print("Registration failed: " + e.getMessage());
+                }
+            }
+        } while (flag == 1);
+        sc.close();
+    }
+}
+
+README.md file:
+# Java-Day4-Proj1-Phase2
+
+This is a simple Java console-based application demonstrating basic **object-oriented programming (OOP)** principles, **custom exception handling**, and a **user registration system**. The application ensures users meet an age requirement before they can be registered.
+
+---
+
+## 📁 Project Structure
+
+Directory structure:
+└── adrin-bershik-c-j-java-day4-proj1-phase2/
+├── day4proj1phase2.txt
+├── pom.xml
+└── src/
+├── main/
+│ └── java/
+│ ├── com/
+│ │ └── day4proj1phase2/
+│ │ └── App.java
+│ ├── exceptions/
+│ │ └── InvalidAgeException.java
+│ ├── main/
+│ │ └── Main.java
+│ ├── models/
+│ │ └── User.java
+│ └── services/
+│ └── UserService.java
+└── test/
+└── java/
+└── com/
+└── day4proj1phase2/
+└── AppTest.java
+
+---
+
+## 🚀 Features
+
+- Register users with name and age.
+- Validates if the user's age is **18 or above**.
+- Throws a **custom exception** (`InvalidAgeException`) for users below 18.
+- Loops user input until `"exit"` is typed as the name.
+
+---
+
+## 📦 Technologies Used
+
+- Java 17+
+- Maven (for project and dependency management)
+- JUnit (basic test structure included)
+
+---
+
+## 🧪 Running the Application
+
+### Prerequisites
+
+- Java installed (JDK 17 or above)
+- Maven installed
+
+### Steps
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Adrin-Bershik-C-J/Java-Day4-Proj1-Phase2.git
+   cd Java-Day4-Proj1-Phase2
+   ```
